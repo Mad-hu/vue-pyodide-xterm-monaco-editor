@@ -8,7 +8,7 @@ const app = express();
 const PORT = 3000;
 const pythonCodePath = path.resolve(__dirname, "../python-code/course");
 const zipFilePath = path.resolve(__dirname, "../python-code/zip");
-const host = "http://172.25.2.38:3000";
+const host = "http://localhost:3000";
 app.use(cors());
 app.use("/static", express.static(pythonCodePath));
 app.use("/zip", express.static(zipFilePath));

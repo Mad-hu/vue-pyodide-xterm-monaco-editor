@@ -1,6 +1,6 @@
 import { ITreeItem } from './filetree.service'
 
-const server = 'http://172.25.2.38:3000'
+const server = 'http://localhost:3000'
 
 const getFileApi = '/api/getfiles'
 const getFileZipPathApi = '/api/getfilezip'
