@@ -1,0 +1,1 @@
+# 创建任意的文件夹，在vue项目HomeView.vue中修改pythonCodeFolder为同名，这些文件夹会被显示在vue项目的目录树中。同时也会写入到虚拟文件系统中

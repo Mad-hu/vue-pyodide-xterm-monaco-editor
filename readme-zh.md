@@ -1,6 +1,6 @@
-# env nodejs>20
+# 环境 nodejs>20
 
-# build and run file server
+# 构建和启动文件服务
 ```
 cd fs-server
 // 构建
@@ -9,7 +9,7 @@ npm install
 npm run start
 ```
 
-# build and run web server
+# 构建和启动web服务
 ```
 cd client
 // 构建
