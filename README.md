@@ -1,6 +1,6 @@
 ## vue-pyodide-xterm-monaco-editor, an online Python program editor demo developed with Vue 3. With Pyodide, you can run programs like Pygame and Matplotlib in the browser. I hope this demo can help you.
 
-[中文文档](./README-zh.md)
+[中文文档](./readme-zh.md)
 
 <p>Running Matplotlib, you can see the image output in the left GUI area. I think this is not the best approach.</p>
 <img src="./imgs/matplotlibdemo.png" width="100%" />
