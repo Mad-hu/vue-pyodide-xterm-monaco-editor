@@ -28,7 +28,6 @@ const canvasRef = ref(null)
 
 const path = decodeURIComponent(route.query.path as string || '') 
 let pythonCodeFolder = route.query.project as string
-const xtermOutputRef = ref(null)
 let pyodide: PyodideInterface
 
 const initpython = async () => {

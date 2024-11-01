@@ -20,6 +20,7 @@ import { ElMessage } from 'element-plus'
 import { ref } from 'vue'
 import { Search } from '@element-plus/icons-vue'
 import pythonLibraryService, { ELibraryType } from '@/services/python-library.service';
+import loadingService from '@/services/loading.service';
 
 const installPypiName = ref('')
 
@@ -29,12 +30,16 @@ const handlePypiInstall = async () => {
       ElMessage.warning('请输入要安装的包名')
       return
     }
+    loadingService.show('安装中...')
     await pyodideService().loadMicropipPackage(installPypiName.value)
     if (pythonLibraryService.getHasStorage()) {
       pythonLibraryService.setStorageLibrary(ELibraryType.PIPY, [installPypiName.value])
     }
+    loadingService.hide()
     ElMessage.success('安装成功')
   } catch (error) {
+    console.log(error)
+    loadingService.hide()
     ElMessage.error('安装失败')
   }
 }

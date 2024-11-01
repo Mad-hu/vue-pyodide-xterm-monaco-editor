@@ -54,7 +54,7 @@ watch(
   }
 )
 
-const handleRemoveTab = (targetName: string) => {
+const handleRemoveTab = (targetName: any) => {
   const tabs = editableTabs.value
   let activeName = editableTabsValue.value
   if (activeName === targetName) {

@@ -8,7 +8,7 @@
       </div>
       <div class="right">
         <div class="editor">
-          <Editor ref="editorRef"></Editor>
+          <Editor></Editor>
           <div class="btns">
             <el-button-group>
               <el-button type="primary" :icon="Bicycle" @click="runPythonAsync()">运行</el-button>
@@ -40,7 +40,6 @@ import pythonLibraryService, { ELibraryType } from '@/services/python-library.se
 import xtermOutputService from '@/services/xterm/xterm-output.service'
 
 let pythonCodeFolder = ''
-const editorRef = ref(null)
 const stageRef = ref(null)
 let pyodide: PyodideInterface
 
@@ -96,20 +95,6 @@ const runPythonAsync = async () => {
     })
     return
   }
-  //   const code = `
-  // import ${pythonCodeFolder}.${name}
-  // ${pythonCodeFolder}.${name}.main()
-  //   `
-  // pyodide
-  //   .runPythonAsync(runCode || code)
-  //   .then(() => {
-  //     xtermOutputService().writeln('运行结束')
-  //   })
-  //   .catch((error: any) => {
-  //     const resStr = '\x1B[1;31m' + error.message + '\x1b[0m'
-  //     xtermOutputService().writeln(resStr)
-  //   })
-
   const width = 800
   const height = 1000
   const left = window.screen.width / 2 - width / 2
@@ -130,12 +115,6 @@ const runPythonAsync = async () => {
 
 const stopPythonAsync = () => {
   runWindow && runWindow.close()
-  // ElMessage({
-  //   message: '停止运行还没实现，请刷新网页',
-  //   type: 'success'
-  // })
-  // return
-  // pyodide.runPythonAsync('raise SystemExit')
 }
 
 const handleClear = () => {
@@ -144,23 +123,14 @@ const handleClear = () => {
 
 onMounted(() => {
   initpython()
-
-  if (location.hostname === 'localhost') {
-    return
-  }
   ElMessageBox.alert(
     `
 <ul>
-  <li>兼容性解答 <a href="https://pyodide.org/en/stable/usage/wasm-constraints.html">https://pyodide.org/en/stable/usage/wasm-constraints.html</a></li>
   <li>python外部库使用库管理安装</li>
   <li>安装私有whl库（待实现的功能）</li>
-  <li>pygame运行后无法停止，需要刷新页面（待实现的功能）</li>
-  <li>页面刷新后，编写的代码不会被保存（待实现的功能）</li>
-  <li>需要更新预置代码联系开发者</li>
+  <li>兼容性解答 <a href="https://pyodide.org/en/stable/usage/wasm-constraints.html">https://pyodide.org/en/stable/usage/wasm-constraints.html</a></li>
   <li>开发web pygame和native pygame的区别，详见<a href="https://pyodide.org/en/stable/usage/sdl.html">https://pyodide.org/en/stable/usage/sdl.html</a></li>
-  <li>
-    <span>以下的库肯定可用的<a href="https://pyodide.org/en/stable/usage/packages-in-pyodide.html">https://pyodide.org/en/stable/usage/packages-in-pyodide.html</a></span>
-  </li>
+  <li>以下的库肯定可用的<a href="https://pyodide.org/en/stable/usage/packages-in-pyodide.html">https://pyodide.org/en/stable/usage/packages-in-pyodide.html</a></li>
   <li>全平台python包都支持安装，纯python的一定可用，涉及到硬件调用的，不一定可用，需自己测试。</li>
   <li>pygame 在线demo <a href="https://ryanking13.github.io/pyodide-pygame-demo/">https://ryanking13.github.io/pyodide-pygame-demo/</a></li>
   <li>更多demo <a href="https://pyscript.com/@examples">https://pyscript.com/@examples</a></li>

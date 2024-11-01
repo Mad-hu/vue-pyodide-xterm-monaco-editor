@@ -27,6 +27,7 @@
 import loadingService from '@/services/loading.service'
 import pyodideService from '@/services/pyodide/pyodide.service'
 import pythonLibraryService, { ELibraryType } from '@/services/python-library.service';
+import { ElMessage } from 'element-plus';
 import { computed, ref } from 'vue'
 
 const search = ref('')
@@ -52,13 +53,20 @@ const handlePyodideInstall = async (row: {
   version: string
   isInstalled: boolean
 }) => {
-  loadingService.show('安装中...')
-  const res = await pyodideService().loadPackageForNames([row.name])
-  row.isInstalled = res.installed.includes(row.name)
-  if (pythonLibraryService.getHasStorage()) {
-    pythonLibraryService.setStorageLibrary(ELibraryType.PYODIDE, [row.name])
+  try {
+    loadingService.show('安装中...')
+    const res = await pyodideService().loadPackageForNames([row.name])
+    row.isInstalled = res.installed.includes(row.name)
+    if (pythonLibraryService.getHasStorage()) {
+      pythonLibraryService.setStorageLibrary(ELibraryType.PYODIDE, [row.name])
+    }
+    loadingService.hide()
+    ElMessage.success('安装成功')
+  } catch (error) {
+    console.log(error)
+    loadingService.hide()
+    ElMessage.error('安装失败')
   }
-  loadingService.hide()
 }
 </script>
 
