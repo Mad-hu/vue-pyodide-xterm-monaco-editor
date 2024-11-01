@@ -26,7 +26,7 @@ async def main():
     pygame.display.set_caption("Pygame GEM Window")
     pygame.mouse.set_visible(False)
     # Create The Background
-    background = load_png("gem.png", IMG_DIR, 1)
+    background = load_png("gem.png", IMG_DIR, 0.8)
     screen.blit(background, (0, 0))
     pygame.display.flip()
     # Display The Background
