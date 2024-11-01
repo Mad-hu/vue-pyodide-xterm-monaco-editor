@@ -14,7 +14,8 @@
 
 ## 环境
 
-项目需要nodejs > 20
+- 项目需要nodejs > 20
+- [pyodide release](https://github.com/pyodide/pyodide/releases)你需要将pyodide解压到client/public/pyodide文件夹下
 
 ## 命令行
 
