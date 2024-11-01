@@ -19,6 +19,9 @@
         <div v-else-if="isEditFile(item)" class="monaco-editor">
           <MonacoEditor :fileData="item" />
         </div>
+        <div v-else-if="isAudioFile(item)">
+          <audio :src="item.filePath" controls></audio>
+        </div>
         <div v-else>{{ `不支持的文件类型${item.label}` }}</div>
       </div>
     </el-tab-pane>
@@ -37,6 +40,10 @@ const isEditFile = (item: ITreeItem) => {
 const isImgFile = (item: ITreeItem) => {
   return ['png', 'jpg', 'jpeg', 'ico'].includes(item.ext)
 }
+const isAudioFile = (item: ITreeItem) => {
+  return ['mp3', 'wav', 'ogg'].includes(item.ext)
+}
+
 const editableTabs = computed(() => {
   const data = fileTreeService.getTreeSelectItem()
   if (data.length !== 0 && editableTabsValue.value === '') {

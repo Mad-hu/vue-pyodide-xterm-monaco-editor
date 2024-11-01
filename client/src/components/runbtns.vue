@@ -8,9 +8,9 @@
         >停止</el-button
       >
     </el-button-group>
-    <el-button-group style="{marginLeft: '15px'}">
+    <el-button-group>
       <el-button type="primary" :icon="Bicycle" @click="runPythonAsync()" title="页面内显示结果">运行</el-button>
-      <el-button type="primary" :icon="Remove" @click="stopPythonAsync" title="关闭新窗口运行的程序"
+      <el-button type="primary" :icon="Remove" @click="stopPythonAsync" title="关闭运行的程序"
         >停止</el-button
       >
       <el-button type="primary" :icon="Delete" @click="handleClear" title="清空控制台">清空</el-button>
@@ -41,7 +41,6 @@ const runNewWindowPythonAsync = async () => {
   const top = window.screen.height / 2 - height / 2
   const folder = pyodideService().extractFolder
   const runType = folder.includes('Pygame') ? 'pygame' : 'matplotlib'
-  stopPythonAsync()
   runWindow = window.open(
     '/run?project=' + folder + '&runType=' + runType + '&path=' + encodeURIComponent(path),
     '_blank',
@@ -102,12 +101,16 @@ const stopPythonAsync = () => {
     })
 }
 
-const handleClear = () => {
-  xtermOutputService().clear()
+const handleClearMatplotlib = () => {
   const matplotlibRender = document.getElementById('matplotlibRender');
   if (matplotlibRender) {
     matplotlibRender.innerHTML = '';
   }
+}
+
+const handleClear = () => {
+  xtermOutputService().clear()
+  handleClearMatplotlib()
 }
 </script>
 
