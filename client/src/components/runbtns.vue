@@ -104,6 +104,10 @@ const stopPythonAsync = () => {
 
 const handleClear = () => {
   xtermOutputService().clear()
+  const matplotlibRender = document.getElementById('matplotlibRender');
+  if (matplotlibRender) {
+    matplotlibRender.innerHTML = '';
+  }
 }
 </script>
 
