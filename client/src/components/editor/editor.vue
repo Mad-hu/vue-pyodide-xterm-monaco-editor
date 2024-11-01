@@ -73,28 +73,24 @@ const handleRemoveTab = (targetName: any) => {
 </script>
 
 <style scoped lang="scss">
-.editor {
+.editor-content,
+.monaco-editor {
   width: 100%;
   height: 100%;
-  .editor-content,
-  .monaco-editor {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .img-view {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .editor-tabs {
-    width: 100%;
-    height: 100%;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.img-view {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.editor-tabs {
+  width: 100%;
+  height: 100%;
 }
 :deep(.el-tab-pane) {
   background-color: #f0f2f5;

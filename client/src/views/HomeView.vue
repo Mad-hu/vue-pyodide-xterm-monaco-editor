@@ -4,17 +4,14 @@
     <div class="container">
       <div class="left">
         <Filetree :onProjectChange="handleProjectChanged" v-if="pyodideReady"></Filetree>
-        <Stage ref="stageRef" />
       </div>
       <div class="right">
-        <div class="editor">
-          <Editor></Editor>
-          <div class="btns">
-            <el-button-group>
-              <el-button type="primary" :icon="Bicycle" @click="runPythonAsync()">运行</el-button>
-              <el-button type="primary" :icon="Delete" @click="handleClear">清空</el-button>
-              <el-button type="primary" :icon="Remove" @click="stopPythonAsync">停止</el-button>
-            </el-button-group>
+        <div class="cont">
+          <div class="editor-cont">
+            <Editor></Editor>
+          </div>
+          <div class="stage-cont">
+            <Stage ref="stageRef" />
           </div>
         </div>
         <XtermOutput></XtermOutput>
@@ -32,10 +29,8 @@ import Editor from '@/components/editor/editor.vue'
 import Filetree from '@/components/filetree/filetree.vue'
 import Stage from '@/components/stage/stage.vue'
 import XtermOutput from '@/components/xterm/xterm-output.vue'
-import { Bicycle, Delete, Remove } from '@element-plus/icons-vue'
 import apiService from '@/services/api.service'
-import fileTreeService from '@/services/filetree.service'
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { ElMessageBox } from 'element-plus'
 import pythonLibraryService, { ELibraryType } from '@/services/python-library.service'
 import xtermOutputService from '@/services/xterm/xterm-output.service'
 
@@ -83,42 +78,6 @@ const initpython = async () => {
       await pyodideService().loadMicropipPackage(name)
     }
   }
-}
-
-let runWindow: WindowProxy | null = null;
-const runPythonAsync = async () => {
-  const { name, ext, path } = fileTreeService.getCurrentItem()
-  if (ext !== 'py') {
-    ElMessage({
-      message: '请在左侧选择一个python文件',
-      type: 'warning'
-    })
-    return
-  }
-  const width = 800
-  const height = 1000
-  const left = window.screen.width / 2 - width / 2
-  const top = window.screen.height / 2 - height / 2
-  const runType = pythonCodeFolder.includes('Pygame') ? 'pygame' : 'matplotlib'
-  stopPythonAsync()
-  runWindow = window.open(
-    '/run?project=' +
-      pythonCodeFolder +
-      '&runType=' +
-      runType +
-      '&path=' +
-      encodeURIComponent(path),
-    '_blank',
-    `toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=yes,width=${width},height=${height},top=${top},left=${left}`
-  )
-}
-
-const stopPythonAsync = () => {
-  runWindow && runWindow.close()
-}
-
-const handleClear = () => {
-  xtermOutputService().clear()
 }
 
 onMounted(() => {
@@ -178,19 +137,21 @@ main {
   border-left: 1px solid #eee;
   border-right: 1px solid #eee;
   position: relative;
-  .editor {
+  .cont {
     width: 100%;
     height: 100%;
     position: relative;
-    .btns {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      position: absolute;
-      bottom: 10px;
-      right: 30px;
-      z-index: 99;
-    }
+    display: flex;
+  }
+  .stage-cont {
+    width: 500px;
+    height: 100%;
+  }
+  .editor-cont {
+    width: calc(100% - 500px);
+    height: 100%;
+    position: relative;
+    display: flex;
   }
 }
 .left {

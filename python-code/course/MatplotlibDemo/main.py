@@ -9,7 +9,7 @@ X, Y = np.meshgrid(x, y)
 Z1 = np.exp(-(X**2) - Y**2)
 Z2 = np.exp(-((X - 1) ** 2) - (Y - 1) ** 2)
 Z = (Z1 - Z2) * 2
-plt.figure()
+plt.figure(figsize=(5, 4.1))
 plt.imshow(
 Z,
 interpolation="bilinear",
@@ -24,3 +24,5 @@ vmin=-abs(Z).max(),
 async def main():
     plt.show()
     
+async def stop():
+    print("Stopped")

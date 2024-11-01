@@ -1,7 +1,7 @@
 <template>
   <div class="renders">
     <div class="canvas-box" v-show="type === 'pygame'">
-      <canvas id="canvasRender" ref="canvasRef"></canvas>
+      <canvas id="canvas" ref="canvasRef"></canvas>
     </div>
     <div class="matplotlib-box" v-show="type === 'matplotlib'">
       <div id="matplotlibRender"></div>
@@ -121,10 +121,12 @@ onMounted(() => {
 .renders {
   width: 100%;
   height: calc(100% - 330px);
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .canvas-box {
-    width: 100%;
-    height: 100%;
+    width: 600px;
+    height: 600px;
     canvas {
       width: 100%;
       height: 100%;

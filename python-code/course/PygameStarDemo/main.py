@@ -120,3 +120,6 @@ async def main():
         await asyncio.sleep(0)
 
     pygame.quit()
+
+async def stop():
+    pygame.quit()

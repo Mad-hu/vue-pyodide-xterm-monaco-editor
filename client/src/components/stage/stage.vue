@@ -1,7 +1,7 @@
 <template>
   <div class="stage">
     <div class="title">GUI</div>
-    <canvas id="stageCanvas" ref="stageCanvas"></canvas>
+    <canvas id="canvas" ref="stageCanvas"></canvas>
     <div id="matplotlibRender"></div>
   </div>
 </template>
@@ -22,11 +22,12 @@ defineExpose({
 
 <style scoped lang="scss">
 .stage {
-  width: 300px;
+  width: 500px;
   text-align: center;
-  height: 330px;
+  height: 100%;
   position: absolute;
   bottom: 0;
+  border-left: 1px solid #eee;
   .title {
     height: 30px;
     display: flex;
@@ -38,7 +39,7 @@ defineExpose({
   }
   canvas {
     width: 100%;
-    height: 300px;
+    height: calc(100% - 30px);
     position: absolute;
     left: 0;
     bottom: 0;

@@ -36,6 +36,7 @@ declare module 'vue' {
     PyodideStatus: typeof import('./src/components/menu/pyodide-status.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Runbtns: typeof import('./src/components/runbtns.vue')['default']
     Stage: typeof import('./src/components/stage/stage.vue')['default']
     Terminal: typeof import('./src/components/xterm/terminal.vue')['default']
     XtermOutput: typeof import('./src/components/xterm/xterm-output.vue')['default']

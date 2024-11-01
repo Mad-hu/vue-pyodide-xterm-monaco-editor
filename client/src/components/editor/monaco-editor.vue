@@ -1,5 +1,6 @@
 <template>
   <div class="editor" ref="editorRef"></div>
+  <Runbtns></Runbtns>
 </template>
 
 <script lang="ts" setup>
@@ -8,6 +9,7 @@ import { ITreeItem } from '@/services/filetree.service'
 import pyodideService from '@/services/pyodide/pyodide.service'
 import * as monaco from 'monaco-editor'
 import { onMounted, onUnmounted, ref } from 'vue'
+import Runbtns from '../runbtns.vue'
 
 const hasChange = ref(false)
 const props = defineProps({
@@ -39,7 +41,6 @@ const resize = () => {
 
 const saveCode = async () => {
   const value = editor.getValue()
-
   hasChange.value = false
 }
 
